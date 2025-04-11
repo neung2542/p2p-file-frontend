@@ -23,7 +23,7 @@ export default function HomePage() {
             Fast, reliable, and efficient file transfers with our Axum server.
           </p> */}
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 px-4 md:px-0">
             <Link href="/send">
               <Button
                 size="lg"
@@ -42,7 +42,7 @@ export default function HomePage() {
         </div>
 
         {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full mt-24 px-4 lg:px-0">
           <div className="p-6 rounded-xl subtle-border hover-lift bg-background/50">
             <div className="w-10 h-10 rounded-lg bg-secondary/80 flex items-center justify-center mb-4">
               <svg
