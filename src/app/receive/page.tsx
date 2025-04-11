@@ -53,13 +53,13 @@ export default function ReceivePage() {
 
   const handleReceivedChunk = (chunkData: ArrayBuffer) => {
     console.log("Received chunk:", chunkData);
-    
+
     if (!chunkData || chunkData.byteLength === 0) {
       return;
     }
     receivedChunksRef.current.push(chunkData);
     console.log(chunkData);
-    
+
     const newReceivedBytes = receivedBytes.current + chunkData.byteLength;
     receivedBytes.current = newReceivedBytes;
 
@@ -117,7 +117,7 @@ export default function ReceivePage() {
 
     ws.onmessage = (event) => {
       console.log(event.data);
-      
+
       if (typeof event.data === "string") {
         try {
           const data = JSON.parse(event.data);
@@ -128,7 +128,7 @@ export default function ReceivePage() {
             const expectedSize = data.totalBytes || fileMetadata?.size || 0;
 
             setTimeout(() => {
-              if(receivedBytes.current >= expectedSize * 0.95) {
+              if (receivedBytes.current >= expectedSize * 0.95) {
                 completeFileTransfer();
               }
             }, 500);
@@ -138,7 +138,7 @@ export default function ReceivePage() {
         }
       } else if (event.data instanceof ArrayBuffer) {
         handleReceivedChunk(event.data);
-      }  else if (event.data instanceof Blob) {
+      } else if (event.data instanceof Blob) {
         const reader = new FileReader();
         reader.onload = () => {
           const arrayBuffer = reader.result as ArrayBuffer;
@@ -162,8 +162,7 @@ export default function ReceivePage() {
           connectWebSocket();
         }, RECONNECT_DELAY);
       }
-    }
-
+    };
   };
   const completeFileTransfer = () => {
     try {
@@ -213,7 +212,7 @@ export default function ReceivePage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
-      <header className="container flex items-center justify-between p-4">
+      <header className="w-fit z-10 flex items-center justify-between p-4">
         <Link href="/">
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-5 w-5" />
@@ -224,7 +223,7 @@ export default function ReceivePage() {
       </header>
 
       {/* Main content */}
-      <main className="flex-1 container flex flex-col items-center justify-center py-8 max-w-md">
+      <main className="flex-1 container flex flex-col items-center justify-center py-8 max-w-md mx-auto">
         <div className="w-full space-y-8">
           {!senderId ? (
             <>
@@ -270,7 +269,10 @@ export default function ReceivePage() {
                 </div>
               </div>
 
-              <Button className="w-full" onClick={connectWebSocket}>
+              <Button
+                className="w-full cursor-pointer"
+                onClick={connectWebSocket}
+              >
                 Connect to Server
               </Button>
             </>
@@ -303,10 +305,15 @@ export default function ReceivePage() {
                 </p>
               </div>
 
-              <Button className="w-full" onClick={downloadFile}>
-                <DownloadIcon className="mr-2 h-4 w-4" />
-                Download File
-              </Button>
+              <div className="px-6">
+                <Button
+                  className="w-full cursor-pointer"
+                  onClick={downloadFile}
+                >
+                  <DownloadIcon className="mr-2 h-4 w-4" />
+                  Download File
+                </Button>
+              </div>
             </>
           ) : (
             <>

@@ -237,7 +237,7 @@ export default function SendPage() {
   return (
     <div className="min-h-screen flex flex-col gradient-bg">
       {/* Header */}
-      <header className="container flex items-center justify-between p-4">
+      <header className="w-fit z-10 flex items-center justify-between p-4">
         <Link href="/">
           <Button
             variant="ghost"
@@ -252,8 +252,8 @@ export default function SendPage() {
       </header>
 
       {/* Main content */}
-      <main className="flex-1 container flex flex-col items-center justify-center py-8 max-w-md">
-        <div className="w-full space-y-8">
+      <main className="flex-1 container flex flex-col items-center justify-center py-8 max-w-md mx-auto">
+        <div className="w-full space-y-8 px-4 md:px-0">
           {!file && (
             <>
               <div className="text-center space-y-3">
@@ -300,7 +300,7 @@ export default function SendPage() {
               <FileCard file={file} className="mb-6" />
 
               <Button
-                className="w-full py-6 rounded-xl hover-lift"
+                className="w-full py-6 rounded-xl hover-lift cursor-pointer"
                 onClick={generateReceiverLink}
                 disabled={isGeneratingLink}
               >
@@ -343,7 +343,7 @@ export default function SendPage() {
                     <Button
                       variant="secondary"
                       size="icon"
-                      className="rounded-l-none"
+                      className="rounded-l-none cursor-pointer"
                       onClick={copyLink}
                     >
                       {copied ? (
@@ -375,7 +375,7 @@ export default function SendPage() {
                     </div>
                   ) : (
                     <Button
-                      className="w-full py-6 rounded-xl hover-lift"
+                      className="w-full py-6 px-4 rounded-xl hover-lift cursor-pointer"
                       onClick={sendFile}
                       disabled={fileSending}
                     >
